@@ -6,11 +6,6 @@
   <link rel="icon" type="image/png" href="images/robot.png">
   <title>Robotics Club</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script>
-    emailjs.init('MABhQ2J0hSzcTHidy');
-  </script>
   <style>
     @keyframes float {
       0%, 100% { transform: translateY(0); }
@@ -59,27 +54,46 @@
 <section id="courses" class="py-20 px-6 bg-gradient-to-r from-gray-800 to-gray-900 text-center">
   <h2 class="text-4xl font-bold text-white mb-12">📚 Our Robotics Courses</h2>
   <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-10">
+
+    <!-- Beginner Robotics -->
     <div class="bg-gray-800 rounded-2xl p-6 glass hover:scale-105 transition-transform">
       <h3 class="text-2xl font-bold text-cyan-400 mb-2">Beginner Robotics</h3>
       <p class="text-gray-300 mb-4">Learn basic Robotics concepts and build your first circuit.</p>
       <p class="text-gray-300 mb-4">Duration: from 20/6/2025 to 20/7/2025</p>
       <p class="font-bold text-white mb-4">EGP 300</p>
-      <button onclick="openCheckout('Beginner Robotics', 300)" class="bg-cyan-500 hover:bg-cyan-600 px-4 py-2 rounded-full text-white">Enroll Me</button>
+<a href="https://docs.google.com/forms/d/1P5repF9cSUeqSKsB0bZrB975j93pD7dwlrbY0-ef0s8/viewform?edit_requested=true" 
+   target="_self" 
+   class="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-lg font-bold inline-block transition duration-300">
+   Enroll Me
+</a>
     </div>
+
+    <!-- IOT Robotics -->
     <div class="bg-gray-800 rounded-2xl p-6 glass hover:scale-105 transition-transform">
       <h3 class="text-2xl font-bold text-purple-400 mb-2">IOT Robotics</h3>
       <p class="text-gray-300 mb-4">Build smarter robots with WIFI, apps and websites.</p>
       <p class="text-gray-300 mb-4">Duration: from 1/8/2025 to 1/9/2025</p>
       <p class="font-bold text-white mb-4">EGP 350</p>
-      <button onclick="openCheckout('IOT Robotics', 350)" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-full text-white">Enroll Me</button>
+<a href="https://docs.google.com/forms/d/1P5repF9cSUeqSKsB0bZrB975j93pD7dwlrbY0-ef0s8/viewform?edit_requested=true" 
+   target="_self" 
+   class="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-lg font-bold inline-block transition duration-300">
+   Enroll Me
+</a>
     </div>
+
+    <!-- Full Stack -->
     <div class="bg-gray-800 rounded-2xl p-6 glass hover:scale-105 transition-transform">
       <h3 class="text-2xl font-bold text-pink-400 mb-2">Full stack</h3>
       <p class="text-gray-300 mb-4">Start from the beginning till IOT and control microcontrollers using WIFI.</p>
       <p class="text-gray-300 mb-4">Duration: from 20/6/2025 to 1/9/2025</p>
       <p class="font-bold text-white mb-4">EGP 600</p>
-      <button onclick="openCheckout('Full stack', 600)" class="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded-full text-white">Enroll Me</button>
+<a href="https://docs.google.com/forms/d/1P5repF9cSUeqSKsB0bZrB975j93pD7dwlrbY0-ef0s8/viewform?edit_requested=true" 
+   target="_self" 
+   class="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-lg font-bold inline-block transition duration-300">
+   Enroll Me
+</a>
     </div>
+
   </div>
 </section>
 
@@ -131,166 +145,6 @@
   <p>Phone: +201146599953  -  +201095184555</p>
 </section>
 
-<!-- Checkout Modal -->
-<div id="checkoutModal" class="fixed inset-0 z-50 items-center justify-center hidden bg-black bg-opacity-70">
-  <div class="bg-white text-black rounded-lg p-6 w-full max-w-md">
-    <form id="checkoutForm" class="space-y-4">
-      <h2 class="text-xl font-bold mb-2">Checkout</h2>
-
-      <input type="hidden" name="course" id="checkoutCourse" />
-      <input type="hidden" name="price" id="checkoutPrice" />
-      <input type="hidden" name="ticket_count" id="ticketCountHidden" />
-      <input type="hidden" name="total" id="totalFinal" />
-      <input type="hidden" name="discount_applied" id="discountApplied" />
-      <input type="hidden" name="image_base64" id="imageBase64" />
-
-      <div>
-        <label class="block font-semibold">Your Name</label>
-        <input type="text" name="name" required class="w-full border p-2 rounded" />
-      </div>
-
-      <div>
-        <label class="block font-semibold">Email</label>
-        <input type="email" name="email" required class="w-full border p-2 rounded" />
-      </div>
-
-      <div>
-        <label class="block font-semibold">Number of Tickets</label>
-        <input type="number" id="ticketCount" min="1" value="1" class="w-full border p-2 rounded" onchange="calculateTotal()" />
-      </div>
-
-      <div>
-        <label class="block font-semibold">Promo Code</label>
-        <input type="text" id="promoCode" class="w-full border p-2 rounded" />
-        <button type="button" id="applyBtn" onclick="applyPromo()" class="mt-1 px-3 py-1 bg-blue-600 text-white rounded">Apply</button>
-        <p id="promoMessage" class="text-sm mt-1"></p>
-      </div>
-
-      <div>
-        <label class="block font-semibold">Transfer Image</label>
-        <input type="file" id="transferImage" required class="w-full border p-2 rounded" />
-      </div>
-
-      <div class="font-semibold">
-        Total: EGP <span id="totalAmount">0</span>
-      </div>
-
-      <div class="flex justify-between">
-        <button type="button" onclick="closeCheckout()" class="bg-gray-300 px-4 py-2 rounded">Cancel</button>
-        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Submit</button>
-      </div>
-    </form>
-  </div>
-</div>
-    
-<script>
-  let promoApplied = false;
-  let discountPerTicket = 0;
-
-  function calculateTotal() {
-    const price = parseInt(document.getElementById('checkoutPrice').value);
-    const count = parseInt(document.getElementById('ticketCount').value) || 1;
-    const total = price * count - (discountPerTicket * count);
-    document.getElementById('totalAmount').innerText = total;
-    document.getElementById('totalFinal').value = total;
-    document.getElementById('ticketCountHidden').value = count;
-  }
-
-  function openCheckout(course, price) {
-    promoApplied = false;
-    discountPerTicket = 0;
-    document.getElementById('checkoutForm').reset();
-    document.getElementById('checkoutCourse').value = course;
-    document.getElementById('checkoutPrice').value = price;
-    document.getElementById('ticketCount').value = 1;
-    document.getElementById('promoCode').disabled = false;
-    document.getElementById('ticketCount').disabled = false;
-    document.getElementById('applyBtn').disabled = false;
-    document.getElementById('promoMessage').innerText = '';
-    document.getElementById('totalAmount').innerText = price;
-    document.getElementById('totalFinal').value = price;
-    document.getElementById('ticketCountHidden').value = 1;
-    document.getElementById('checkoutModal').classList.remove('hidden');
-    document.getElementById('checkoutModal').classList.add('flex');
-  }
-
-  function closeCheckout() {
-    document.getElementById('checkoutModal').classList.remove('flex');
-    document.getElementById('checkoutModal').classList.add('hidden');
-  }
-
-  function applyPromo() {
-    const code = document.getElementById('promoCode').value.trim().toUpperCase();
-    const count = parseInt(document.getElementById('ticketCount').value);
-    const course = document.getElementById('checkoutCourse').value.toLowerCase();
-    const promoMsg = document.getElementById('promoMessage');
-
-    discountPerTicket = 0;
-    promoMsg.innerText = '';
-
-    if (course.includes('full stack')) {
-      if (code === 'TWOTIX' && count >= 2) {
-        discountPerTicket = 100;
-        promoMsg.innerText = '✔️ TWOTIX applied: EGP 100 off per ticket for Full Stack';
-      } else if (code === 'THREETIX' && count >= 3) {
-        discountPerTicket = 150;
-        promoMsg.innerText = '✔️ THREETIX applied: EGP 150 off per ticket for Full Stack';
-      } else {
-        promoMsg.innerText = '❌ Invalid or requirements not met for Full Stack';
-        return;
-      }
-    } else {
-      if (code === 'DUO50' && count >= 2) {
-        discountPerTicket = 50;
-        promoMsg.innerText = '✔️ DUO50 applied: EGP 50 off per ticket';
-      } else if (code === 'TRIO100' && count >= 3) {
-        discountPerTicket = 100;
-        promoMsg.innerText = '✔️ TRIO100 applied: EGP 100 off per ticket';
-      } else {
-        promoMsg.innerText = '❌ Invalid or requirements not met for this course';
-        return;
-      }
-    }
-
-    promoApplied = true;
-    document.getElementById('promoCode').disabled = true;
-    document.getElementById('ticketCount').disabled = true;
-    document.getElementById('applyBtn').disabled = true;
-    document.getElementById('discountApplied').value = discountPerTicket;
-    calculateTotal();
-  }
-
-  function toBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
-
-  document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const fileInput = document.getElementById('transferImage');
-    if (!fileInput.files[0]) {
-      Swal.fire('Error', 'Please upload the transfer image.', 'error');
-      return;
-    }
-
-    const imageBase64 = await toBase64(fileInput.files[0]);
-    document.getElementById('imageBase64').value = imageBase64;
-
-    emailjs.sendForm('service_furjqki', 'template_5q91zdr', form)
-      .then(() => {
-        Swal.fire('✅ Success!', 'Your enrollment has been submitted.', 'success');
-        closeCheckout();
-      }, (error) => {
-        console.error('EmailJS Error:', error);
-        Swal.fire('Error', 'Sending failed. Please try again.', 'error');
-      });
-  });
-</script>
 </body>
 </html>
+<script>
